@@ -248,14 +248,14 @@ func (stats *WTLogStats) Export(ch chan<- prometheus.Metric) {
 	wtLogRecordsTotal.WithLabelValues("uncompressed").Add(stats.RecordsUncompressed)
 	wtLogBytesTotal.WithLabelValues("payload").Add(stats.BytesPayloadData)
 	wtLogBytesTotal.WithLabelValues("written").Add(stats.BytesWritten)
-	wtLogOperationsTotal.WithLabelValues("read").Set(stats.LogReads)
-	wtLogOperationsTotal.WithLabelValues("write").Set(stats.LogWrites)
-	wtLogOperationsTotal.WithLabelValues("scan").Set(stats.LogScans)
-	wtLogOperationsTotal.WithLabelValues("scan_double").Set(stats.LogScansDouble)
-	wtLogOperationsTotal.WithLabelValues("sync").Set(stats.LogSyncs)
-	wtLogOperationsTotal.WithLabelValues("sync_dir").Set(stats.LogSyncDirs)
-	wtLogOperationsTotal.WithLabelValues("flush").Set(stats.LogFlushes)
-	wtLogRecordsScannedTotal.Set(stats.RecordsProcessedLogScan)
+	wtLogOperationsTotal.WithLabelValues("read").Add(stats.LogReads)
+	wtLogOperationsTotal.WithLabelValues("write").Add(stats.LogWrites)
+	wtLogOperationsTotal.WithLabelValues("scan").Add(stats.LogScans)
+	wtLogOperationsTotal.WithLabelValues("scan_double").Add(stats.LogScansDouble)
+	wtLogOperationsTotal.WithLabelValues("sync").Add(stats.LogSyncs)
+	wtLogOperationsTotal.WithLabelValues("sync_dir").Add(stats.LogSyncDirs)
+	wtLogOperationsTotal.WithLabelValues("flush").Add(stats.LogFlushes)
+	wtLogRecordsScannedTotal.Add(stats.RecordsProcessedLogScan)
 }
 
 func (stats *WTLogStats) Describe(ch chan<- *prometheus.Desc) {
@@ -296,10 +296,10 @@ type WTTransactionStats struct {
 }
 
 func (stats *WTTransactionStats) Export(ch chan<- prometheus.Metric) {
-	wtTransactionsTotal.WithLabelValues("begins").Set(stats.Begins)
-	wtTransactionsTotal.WithLabelValues("checkpoints").Set(stats.Checkpoints)
-	wtTransactionsTotal.WithLabelValues("committed").Set(stats.Committed)
-	wtTransactionsTotal.WithLabelValues("rolledback").Set(stats.RolledBack)
+	wtTransactionsTotal.WithLabelValues("begins").Add(stats.Begins)
+	wtTransactionsTotal.WithLabelValues("checkpoints").Add(stats.Checkpoints)
+	wtTransactionsTotal.WithLabelValues("committed").Add(stats.Committed)
+	wtTransactionsTotal.WithLabelValues("rolledback").Add(stats.RolledBack)
 	wtTransactionsCheckpointMs.WithLabelValues("min").Set(stats.CheckpointMinMs)
 	wtTransactionsCheckpointMs.WithLabelValues("max").Set(stats.CheckpointMaxMs)
 	wtTransactionsTotalCheckpointMs.Set(stats.CheckpointTotalMs)
