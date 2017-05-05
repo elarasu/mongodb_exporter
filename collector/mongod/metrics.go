@@ -275,9 +275,9 @@ type GetLastErrorStats struct {
 // Export exposes the get last error stats.
 func (getLastErrorStats *GetLastErrorStats) Export(ch chan<- prometheus.Metric) {
 	metricsGetLastErrorWtimeNumTotal.Set(getLastErrorStats.Wtime.Num)
-	metricsGetLastErrorWtimeTotalMilliseconds.Set(getLastErrorStats.Wtime.TotalMillis)
+	metricsGetLastErrorWtimeTotalMilliseconds.Add(getLastErrorStats.Wtime.TotalMillis)
 
-	metricsGetLastErrorWtimeoutsTotal.Set(getLastErrorStats.Wtimeouts)
+	metricsGetLastErrorWtimeoutsTotal.Add(getLastErrorStats.Wtimeouts)
 }
 
 // OperationStats are the stats for some kind of operations.
@@ -289,9 +289,9 @@ type OperationStats struct {
 
 // Export exports the operation stats.
 func (operationStats *OperationStats) Export(ch chan<- prometheus.Metric) {
-	metricsOperationTotal.WithLabelValues("fastmod").Set(operationStats.Fastmod)
-	metricsOperationTotal.WithLabelValues("idhack").Set(operationStats.Idhack)
-	metricsOperationTotal.WithLabelValues("scan_and_order").Set(operationStats.ScanAndOrder)
+	metricsOperationTotal.WithLabelValues("fastmod").Add(operationStats.Fastmod)
+	metricsOperationTotal.WithLabelValues("idhack").Add(operationStats.Idhack)
+	metricsOperationTotal.WithLabelValues("scan_and_order").Add(operationStats.ScanAndOrder)
 }
 
 // QueryExecutorStats are the stats associated with a query execution.
@@ -302,8 +302,8 @@ type QueryExecutorStats struct {
 
 // Export exports the query executor stats.
 func (queryExecutorStats *QueryExecutorStats) Export(ch chan<- prometheus.Metric) {
-	metricsQueryExecutorTotal.WithLabelValues("scanned").Set(queryExecutorStats.Scanned)
-	metricsQueryExecutorTotal.WithLabelValues("scanned_objects").Set(queryExecutorStats.ScannedObjects)
+	metricsQueryExecutorTotal.WithLabelValues("scanned").Add(queryExecutorStats.Scanned)
+	metricsQueryExecutorTotal.WithLabelValues("scanned_objects").Add(queryExecutorStats.ScannedObjects)
 }
 
 // RecordStats are stats associated with a record.
@@ -313,7 +313,7 @@ type RecordStats struct {
 
 // Export exposes the record stats.
 func (recordStats *RecordStats) Export(ch chan<- prometheus.Metric) {
-	metricsRecordMovesTotal.Set(recordStats.Moves)
+	metricsRecordMovesTotal.Add(recordStats.Moves)
 }
 
 // ApplyStats are the stats associated with the apply operation.
@@ -324,9 +324,9 @@ type ApplyStats struct {
 
 // Export exports the apply stats
 func (applyStats *ApplyStats) Export(ch chan<- prometheus.Metric) {
-	metricsReplApplyOpsTotal.Set(applyStats.Ops)
+	metricsReplApplyOpsTotal.Add(applyStats.Ops)
 
-	metricsReplApplyBatchesNumTotal.Set(applyStats.Batches.Num)
+	metricsReplApplyBatchesNumTotal.Add(applyStats.Batches.Num)
 	metricsReplApplyBatchesTotalMilliseconds.Set(applyStats.Batches.TotalMillis)
 }
 

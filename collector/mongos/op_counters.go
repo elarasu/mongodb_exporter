@@ -58,12 +58,12 @@ type OpcountersReplStats struct {
 
 // Export exports the data to prometheus.
 func (opCounters *OpcountersReplStats) Export(ch chan<- prometheus.Metric) {
-	opCountersReplTotal.WithLabelValues("insert").Set(opCounters.Insert)
-	opCountersReplTotal.WithLabelValues("query").Set(opCounters.Query)
-	opCountersReplTotal.WithLabelValues("update").Set(opCounters.Update)
-	opCountersReplTotal.WithLabelValues("delete").Set(opCounters.Delete)
-	opCountersReplTotal.WithLabelValues("getmore").Set(opCounters.GetMore)
-	opCountersReplTotal.WithLabelValues("command").Set(opCounters.Command)
+	opCountersReplTotal.WithLabelValues("insert").Add(opCounters.Insert)
+	opCountersReplTotal.WithLabelValues("query").Add(opCounters.Query)
+	opCountersReplTotal.WithLabelValues("update").Add(opCounters.Update)
+	opCountersReplTotal.WithLabelValues("delete").Add(opCounters.Delete)
+	opCountersReplTotal.WithLabelValues("getmore").Add(opCounters.GetMore)
+	opCountersReplTotal.WithLabelValues("command").Add(opCounters.Command)
 
 	opCountersReplTotal.Collect(ch)
 }

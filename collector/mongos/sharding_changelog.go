@@ -33,7 +33,7 @@ type ShardingChangelogStats struct {
 
 func (status *ShardingChangelogStats) Export(ch chan<- prometheus.Metric) {
 	// set all expected event types to zero first, so they show in results if there was no events in the current time period
-	shardingChangelogInfo.WithLabelValues("moveChunk.start").Set(0)
+	shardingChangelogInfo.WithLabelValues("moveChunk.start").Add(0)
 	shardingChangelogInfo.WithLabelValues("moveChunk.to").Set(0)
 	shardingChangelogInfo.WithLabelValues("moveChunk.to_failed").Set(0)
 	shardingChangelogInfo.WithLabelValues("moveChunk.from").Set(0)
