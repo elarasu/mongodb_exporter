@@ -34,17 +34,17 @@ type ShardingChangelogStats struct {
 func (status *ShardingChangelogStats) Export(ch chan<- prometheus.Metric) {
 	// set all expected event types to zero first, so they show in results if there was no events in the current time period
 	shardingChangelogInfo.WithLabelValues("moveChunk.start").Add(0)
-	shardingChangelogInfo.WithLabelValues("moveChunk.to").Set(0)
-	shardingChangelogInfo.WithLabelValues("moveChunk.to_failed").Set(0)
-	shardingChangelogInfo.WithLabelValues("moveChunk.from").Set(0)
-	shardingChangelogInfo.WithLabelValues("moveChunk.from_failed").Set(0)
-	shardingChangelogInfo.WithLabelValues("moveChunk.commit").Set(0)
-	shardingChangelogInfo.WithLabelValues("addShard").Set(0)
-	shardingChangelogInfo.WithLabelValues("removeShard.start").Set(0)
-	shardingChangelogInfo.WithLabelValues("shardCollection").Set(0)
-	shardingChangelogInfo.WithLabelValues("shardCollection.start").Set(0)
-	shardingChangelogInfo.WithLabelValues("split").Set(0)
-	shardingChangelogInfo.WithLabelValues("multi-split").Set(0)
+	shardingChangelogInfo.WithLabelValues("moveChunk.to").Add(0)
+	shardingChangelogInfo.WithLabelValues("moveChunk.to_failed").Add(0)
+	shardingChangelogInfo.WithLabelValues("moveChunk.from").Add(0)
+	shardingChangelogInfo.WithLabelValues("moveChunk.from_failed").Add(0)
+	shardingChangelogInfo.WithLabelValues("moveChunk.commit").Add(0)
+	shardingChangelogInfo.WithLabelValues("addShard").Add(0)
+	shardingChangelogInfo.WithLabelValues("removeShard.start").Add(0)
+	shardingChangelogInfo.WithLabelValues("shardCollection").Add(0)
+	shardingChangelogInfo.WithLabelValues("shardCollection.start").Add(0)
+	shardingChangelogInfo.WithLabelValues("split").Add(0)
+	shardingChangelogInfo.WithLabelValues("multi-split").Add(0)
 
 	// set counts for events found in our query
 	for _, item := range *status.Items {

@@ -327,7 +327,7 @@ func (applyStats *ApplyStats) Export(ch chan<- prometheus.Metric) {
 	metricsReplApplyOpsTotal.Add(applyStats.Ops)
 
 	metricsReplApplyBatchesNumTotal.Add(applyStats.Batches.Num)
-	metricsReplApplyBatchesTotalMilliseconds.Set(applyStats.Batches.TotalMillis)
+	metricsReplApplyBatchesTotalMilliseconds.Add(applyStats.Batches.TotalMillis)
 }
 
 // BufferStats are the stats associated with the buffer
@@ -340,7 +340,7 @@ type BufferStats struct {
 // Export exports the buffer stats.
 func (bufferStats *BufferStats) Export(ch chan<- prometheus.Metric) {
 	metricsReplBufferCount.Set(bufferStats.Count)
-	metricsReplBufferMaxSizeBytes.Set(bufferStats.MaxSizeBytes)
+	metricsReplBufferMaxSizeBytes.Add(bufferStats.MaxSizeBytes)
 	metricsReplBufferSizeBytes.Set(bufferStats.SizeBytes)
 }
 
@@ -355,7 +355,7 @@ type ReplExecutorStats struct {
 // Export replication executor stats
 func (replExecutorStats *ReplExecutorStats) Export(ch chan<- prometheus.Metric) {
 	for key, val := range replExecutorStats.Counters {
-		metricsReplExecutorTotal.WithLabelValues(key).Set(val)
+		metricsReplExecutorTotal.WithLabelValues(key).Add(val)
 	}
 	for key, val := range replExecutorStats.Queues {
 		metricsReplExecutorQueue.WithLabelValues(key).Set(val)
@@ -374,12 +374,12 @@ type MetricsNetworkStats struct {
 
 // Export exposes the network stats.
 func (metricsNetworkStats *MetricsNetworkStats) Export(ch chan<- prometheus.Metric) {
-	metricsReplNetworkBytesTotal.Set(metricsNetworkStats.Bytes)
-	metricsReplNetworkOpsTotal.Set(metricsNetworkStats.Ops)
-	metricsReplNetworkReadersCreatedTotal.Set(metricsNetworkStats.ReadersCreated)
+	metricsReplNetworkBytesTotal.Add(metricsNetworkStats.Bytes)
+	metricsReplNetworkOpsTotal.Add(metricsNetworkStats.Ops)
+	metricsReplNetworkReadersCreatedTotal.Add(metricsNetworkStats.ReadersCreated)
 
-	metricsReplNetworkGetmoresNumTotal.Set(metricsNetworkStats.GetMores.Num)
-	metricsReplNetworkGetmoresTotalMilliseconds.Set(metricsNetworkStats.GetMores.TotalMillis)
+	metricsReplNetworkGetmoresNumTotal.Add(metricsNetworkStats.GetMores.Num)
+	metricsReplNetworkGetmoresTotalMilliseconds.Add(metricsNetworkStats.GetMores.TotalMillis)
 }
 
 // ReplStats are the stats associated with the replication process.
@@ -411,8 +411,8 @@ type PreloadStats struct {
 
 // Export exposes the preload stats.
 func (preloadStats *PreloadStats) Export(ch chan<- prometheus.Metric) {
-	metricsReplPreloadDocsNumTotal.Set(preloadStats.Docs.Num)
-	metricsReplPreloadDocsTotalMilliseconds.Set(preloadStats.Docs.TotalMillis)
+	metricsReplPreloadDocsNumTotal.Add(preloadStats.Docs.Num)
+	metricsReplPreloadDocsTotalMilliseconds.Add(preloadStats.Docs.TotalMillis)
 
 	metricsReplPreloadIndexesNumTotal.Set(preloadStats.Indexes.Num)
 	metricsReplPreloadIndexesTotalMilliseconds.Set(preloadStats.Indexes.TotalMillis)
