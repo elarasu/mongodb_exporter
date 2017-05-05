@@ -199,12 +199,12 @@ type WTCacheStats struct {
 }
 
 func (stats *WTCacheStats) Export(ch chan<- prometheus.Metric) {
-	wtCachePagesTotal.WithLabelValues("read").Set(stats.PagesReadInto)
-	wtCachePagesTotal.WithLabelValues("written").Set(stats.PagesWrittenFrom)
-	wtCacheBytesTotal.WithLabelValues("read").Set(stats.BytesReadInto)
-	wtCacheBytesTotal.WithLabelValues("written").Set(stats.BytesWrittenFrom)
-	wtCacheEvictedTotal.WithLabelValues("modified").Set(stats.EvictedModified)
-	wtCacheEvictedTotal.WithLabelValues("unmodified").Set(stats.EvictedUnmodified)
+	wtCachePagesTotal.WithLabelValues("read").Add(stats.PagesReadInto)
+	wtCachePagesTotal.WithLabelValues("written").Add(stats.PagesWrittenFrom)
+	wtCacheBytesTotal.WithLabelValues("read").Add(stats.BytesReadInto)
+	wtCacheBytesTotal.WithLabelValues("written").Add(stats.BytesWrittenFrom)
+	wtCacheEvictedTotal.WithLabelValues("modified").Add(stats.EvictedModified)
+	wtCacheEvictedTotal.WithLabelValues("unmodified").Add(stats.EvictedUnmodified)
 	wtCachePages.WithLabelValues("total").Set(stats.PagesTotal)
 	wtCachePages.WithLabelValues("dirty").Set(stats.PagesDirty)
 	wtCacheBytes.WithLabelValues("total").Set(stats.BytesTotal)
@@ -244,10 +244,10 @@ type WTLogStats struct {
 }
 
 func (stats *WTLogStats) Export(ch chan<- prometheus.Metric) {
-	wtLogRecordsTotal.WithLabelValues("compressed").Set(stats.RecordsCompressed)
-	wtLogRecordsTotal.WithLabelValues("uncompressed").Set(stats.RecordsUncompressed)
-	wtLogBytesTotal.WithLabelValues("payload").Set(stats.BytesPayloadData)
-	wtLogBytesTotal.WithLabelValues("written").Set(stats.BytesWritten)
+	wtLogRecordsTotal.WithLabelValues("compressed").Add(stats.RecordsCompressed)
+	wtLogRecordsTotal.WithLabelValues("uncompressed").Add(stats.RecordsUncompressed)
+	wtLogBytesTotal.WithLabelValues("payload").Add(stats.BytesPayloadData)
+	wtLogBytesTotal.WithLabelValues("written").Add(stats.BytesWritten)
 	wtLogOperationsTotal.WithLabelValues("read").Set(stats.LogReads)
 	wtLogOperationsTotal.WithLabelValues("write").Set(stats.LogWrites)
 	wtLogOperationsTotal.WithLabelValues("scan").Set(stats.LogScans)
