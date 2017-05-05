@@ -302,7 +302,7 @@ func (stats *WTTransactionStats) Export(ch chan<- prometheus.Metric) {
 	wtTransactionsTotal.WithLabelValues("rolledback").Add(stats.RolledBack)
 	wtTransactionsCheckpointMs.WithLabelValues("min").Set(stats.CheckpointMinMs)
 	wtTransactionsCheckpointMs.WithLabelValues("max").Set(stats.CheckpointMaxMs)
-	wtTransactionsTotalCheckpointMs.Set(stats.CheckpointTotalMs)
+	wtTransactionsTotalCheckpointMs.Add(stats.CheckpointTotalMs)
 	wtTransactionsCheckpointsRunning.Set(stats.CheckpointsRunning)
 }
 
