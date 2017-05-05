@@ -54,18 +54,18 @@ func (status *ShardingChangelogStats) Export(ch chan<- prometheus.Metric) {
 		switch event {
 			case "moveChunk.to":
 				if note == "success" || note == "" {
-					shardingChangelogInfo.WithLabelValues(event).Set(count)
+					shardingChangelogInfo.WithLabelValues(event).Add(count)
 				} else {
-					shardingChangelogInfo.WithLabelValues(event + "_failed").Set(count)
+					shardingChangelogInfo.WithLabelValues(event + "_failed").Add(count)
 				}
 			case "moveChunk.from":
 				if note == "success" || note == "" {
-					shardingChangelogInfo.WithLabelValues(event).Set(count)
+					shardingChangelogInfo.WithLabelValues(event).Add(count)
 				} else {
-					shardingChangelogInfo.WithLabelValues(event + "_failed").Set(count)
+					shardingChangelogInfo.WithLabelValues(event + "_failed").Add(count)
 				}
 			default:
-				shardingChangelogInfo.WithLabelValues(event).Set(count)
+				shardingChangelogInfo.WithLabelValues(event).Add(count)
 		}
 	}
 	shardingChangelogInfo.Collect(ch)

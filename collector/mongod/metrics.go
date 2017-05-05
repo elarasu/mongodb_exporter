@@ -414,8 +414,8 @@ func (preloadStats *PreloadStats) Export(ch chan<- prometheus.Metric) {
 	metricsReplPreloadDocsNumTotal.Add(preloadStats.Docs.Num)
 	metricsReplPreloadDocsTotalMilliseconds.Add(preloadStats.Docs.TotalMillis)
 
-	metricsReplPreloadIndexesNumTotal.Set(preloadStats.Indexes.Num)
-	metricsReplPreloadIndexesTotalMilliseconds.Set(preloadStats.Indexes.TotalMillis)
+	metricsReplPreloadIndexesNumTotal.Add(preloadStats.Indexes.Num)
+	metricsReplPreloadIndexesTotalMilliseconds.Add(preloadStats.Indexes.TotalMillis)
 }
 
 // StorageStats are the stats associated with the storage.
@@ -427,9 +427,9 @@ type StorageStats struct {
 
 // Export exports the storage stats.
 func (storageStats *StorageStats) Export(ch chan<- prometheus.Metric) {
-	metricsStorageFreelistSearchTotal.WithLabelValues("bucket_exhausted").Set(storageStats.BucketExhausted)
-	metricsStorageFreelistSearchTotal.WithLabelValues("requests").Set(storageStats.Requests)
-	metricsStorageFreelistSearchTotal.WithLabelValues("scanned").Set(storageStats.Scanned)
+	metricsStorageFreelistSearchTotal.WithLabelValues("bucket_exhausted").Add(storageStats.BucketExhausted)
+	metricsStorageFreelistSearchTotal.WithLabelValues("requests").Add(storageStats.Requests)
+	metricsStorageFreelistSearchTotal.WithLabelValues("scanned").Add(storageStats.Scanned)
 }
 
 // CursorStatsOpen are the stats for open cursors
@@ -447,7 +447,7 @@ type CursorStats struct {
 
 // Export exports the cursor stats.
 func (cursorStats *CursorStats) Export(ch chan<- prometheus.Metric) {
-	metricsCursorTimedOutTotal.Set(cursorStats.TimedOut)
+	metricsCursorTimedOutTotal.Add(cursorStats.TimedOut)
 	metricsCursorOpen.WithLabelValues("noTimeout").Set(cursorStats.Open.NoTimeout)
 	metricsCursorOpen.WithLabelValues("pinned").Set(cursorStats.Open.Pinned)
 	metricsCursorOpen.WithLabelValues("total").Set(cursorStats.Open.Total)

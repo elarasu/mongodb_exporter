@@ -29,10 +29,10 @@ type NetworkStats struct {
 
 // Export exports the data to prometheus
 func (networkStats *NetworkStats) Export(ch chan<- prometheus.Metric) {
-	networkBytesTotal.WithLabelValues("in_bytes").Set(networkStats.BytesIn)
-	networkBytesTotal.WithLabelValues("out_bytes").Set(networkStats.BytesOut)
+	networkBytesTotal.WithLabelValues("in_bytes").Add(networkStats.BytesIn)
+	networkBytesTotal.WithLabelValues("out_bytes").Add(networkStats.BytesOut)
 
-	networkMetricsNumRequestsTotal.Set(networkStats.NumRequests)
+	networkMetricsNumRequestsTotal.Add(networkStats.NumRequests)
 
 	networkMetricsNumRequestsTotal.Collect(ch)
 	networkBytesTotal.Collect(ch)
