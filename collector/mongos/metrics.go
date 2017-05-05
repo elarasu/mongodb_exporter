@@ -57,9 +57,9 @@ type GetLastErrorStats struct {
 // Export exposes the get last error stats.
 func (getLastErrorStats *GetLastErrorStats) Export(ch chan<- prometheus.Metric) {
 	metricsGetLastErrorWtimeNumTotal.Set(getLastErrorStats.Wtime.Num)
-	metricsGetLastErrorWtimeTotalMilliseconds.Set(getLastErrorStats.Wtime.TotalMillis)
+	metricsGetLastErrorWtimeTotalMilliseconds.Add(getLastErrorStats.Wtime.TotalMillis)
 
-	metricsGetLastErrorWtimeoutsTotal.Set(getLastErrorStats.Wtimeouts)
+	metricsGetLastErrorWtimeoutsTotal.Add(getLastErrorStats.Wtimeouts)
 }
 
 // CursorStatsOpen are the stats for open cursors
@@ -77,7 +77,7 @@ type CursorStats struct {
 
 // Export exports the cursor stats.
 func (cursorStats *CursorStats) Export(ch chan<- prometheus.Metric) {
-        metricsCursorTimedOutTotal.Set(cursorStats.TimedOut)
+        metricsCursorTimedOutTotal.Add(cursorStats.TimedOut)
         metricsCursorOpen.WithLabelValues("noTimeout").Set(cursorStats.Open.NoTimeout)
         metricsCursorOpen.WithLabelValues("pinned").Set(cursorStats.Open.Pinned)
         metricsCursorOpen.WithLabelValues("total").Set(cursorStats.Open.Total)

@@ -33,7 +33,7 @@ func (connectionStats *ConnectionStats) Export(ch chan<- prometheus.Metric) {
 	connections.WithLabelValues("available").Set(connectionStats.Available)
 	connections.Collect(ch)
 
-	connectionsMetricsCreatedTotal.Set(connectionStats.TotalCreated)
+	connectionsMetricsCreatedTotal.Add(connectionStats.TotalCreated)
 	connectionsMetricsCreatedTotal.Collect(ch)
 }
 

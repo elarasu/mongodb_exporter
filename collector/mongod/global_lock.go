@@ -76,7 +76,7 @@ type GlobalLockStats struct {
 
 // Export exports the metrics to prometheus
 func (globalLock *GlobalLockStats) Export(ch chan<- prometheus.Metric) {
-	globalLockTotal.Set(globalLock.LockTime)
+	globalLockTotal.Add(globalLock.LockTime)
 	globalLockRatio.Set(globalLock.Ratio)
 
 	globalLock.CurrentQueue.Export(ch)
