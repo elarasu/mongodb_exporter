@@ -9,8 +9,8 @@ import (
 	"os"
 	"strings"
 
-	"github.com/percona/mongodb_exporter/collector"
-	"github.com/percona/mongodb_exporter/shared"
+	"github.com/elarasu/mongodb_exporter/collector"
+	"github.com/elarasu/mongodb_exporter/shared"
 
 	"github.com/prometheus/client_golang/prometheus"
 	"gopkg.in/yaml.v2"
@@ -183,7 +183,7 @@ func main() {
 
 	shared.ParseEnabledGroups(*enabledGroupsFlag)
 
-	fmt.Println("### Warning: the exporter is in beta/experimental state and field names are very\n### likely to change in the future and features may change or get removed!\n### See: https://github.com/percona/mongodb_exporter for updates")
+	fmt.Println("### Warning: the exporter is in beta/experimental state and field names are very\n### likely to change in the future and features may change or get removed!\n### See: https://github.com/elarasu/mongodb_exporter for updates")
 
 	startWebServer()
 }
