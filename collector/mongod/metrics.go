@@ -254,10 +254,10 @@ type DocumentStats struct {
 
 // Export exposes the document stats to be consumed by the prometheus server.
 func (documentStats *DocumentStats) Export(ch chan<- prometheus.Metric) {
-	metricsDocumentTotal.WithLabelValues("deleted").Set(documentStats.Deleted)
-	metricsDocumentTotal.WithLabelValues("inserted").Set(documentStats.Inserted)
-	metricsDocumentTotal.WithLabelValues("returned").Set(documentStats.Returned)
-	metricsDocumentTotal.WithLabelValues("updated").Set(documentStats.Updated)
+	metricsDocumentTotal.WithLabelValues("deleted").Add(documentStats.Deleted)
+	metricsDocumentTotal.WithLabelValues("inserted").Add(documentStats.Inserted)
+	metricsDocumentTotal.WithLabelValues("returned").Add(documentStats.Returned)
+	metricsDocumentTotal.WithLabelValues("updated").Add(documentStats.Updated)
 }
 
 // BenchmarkStats is bechmark info about an operation.

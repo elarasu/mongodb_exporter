@@ -50,14 +50,14 @@ func (locks LockStatsMap) Export(ch chan<- prometheus.Metric) {
 			key = "dot"
 		}
 
-		locksTimeLockedGlobalMicrosecondsTotal.WithLabelValues("read", key).Set(locks.TimeLockedMicros.Read)
-		locksTimeLockedGlobalMicrosecondsTotal.WithLabelValues("write", key).Set(locks.TimeLockedMicros.Write)
+		locksTimeLockedGlobalMicrosecondsTotal.WithLabelValues("read", key).Add(locks.TimeLockedMicros.Read)
+		locksTimeLockedGlobalMicrosecondsTotal.WithLabelValues("write", key).Add(locks.TimeLockedMicros.Write)
 
-		locksTimeLockedLocalMicrosecondsTotal.WithLabelValues("read", key).Set(locks.TimeLockedMicros.ReadLower)
-		locksTimeLockedLocalMicrosecondsTotal.WithLabelValues("write", key).Set(locks.TimeLockedMicros.WriteLower)
+		locksTimeLockedLocalMicrosecondsTotal.WithLabelValues("read", key).Add(locks.TimeLockedMicros.ReadLower)
+		locksTimeLockedLocalMicrosecondsTotal.WithLabelValues("write", key).Add(locks.TimeLockedMicros.WriteLower)
 
-		locksTimeAcquiringGlobalMicrosecondsTotal.WithLabelValues("read", key).Set(locks.TimeAcquiringMicros.ReadLower)
-		locksTimeAcquiringGlobalMicrosecondsTotal.WithLabelValues("write", key).Set(locks.TimeAcquiringMicros.WriteLower)
+		locksTimeAcquiringGlobalMicrosecondsTotal.WithLabelValues("read", key).Add(locks.TimeAcquiringMicros.ReadLower)
+		locksTimeAcquiringGlobalMicrosecondsTotal.WithLabelValues("write", key).Add(locks.TimeAcquiringMicros.WriteLower)
 	}
 
 	locksTimeLockedGlobalMicrosecondsTotal.Collect(ch)
