@@ -69,9 +69,9 @@ type ServerStatus struct {
 
 // Export exports the server status to be consumed by prometheus.
 func (status *ServerStatus) Export(ch chan<- prometheus.Metric) {
-	instanceUptimeSeconds.Set(status.Uptime)
-	instanceUptimeEstimateSeconds.Set(status.Uptime)
-	instanceLocalTime.Set(float64(status.LocalTime.Unix()))
+	instanceUptimeSeconds.Add(status.Uptime)
+	instanceUptimeEstimateSeconds.Add(status.Uptime)
+	instanceLocalTime.Add(float64(status.LocalTime.Unix()))
 	instanceUptimeSeconds.Collect(ch)
 	instanceUptimeEstimateSeconds.Collect(ch)
 	instanceLocalTime.Collect(ch)

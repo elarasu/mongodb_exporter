@@ -166,13 +166,13 @@ type WTBlockManagerStats struct {
 }
 
 func (stats *WTBlockManagerStats) Export(ch chan<- prometheus.Metric) {
-	wtBlockManagerBlocksTotal.WithLabelValues("read").Set(stats.BlocksRead)
-	wtBlockManagerBlocksTotal.WithLabelValues("read_mapped").Set(stats.MappedBlocksRead)
-	wtBlockManagerBlocksTotal.WithLabelValues("pre_loaded").Set(stats.BlocksPreLoaded)
-	wtBlockManagerBlocksTotal.WithLabelValues("written").Set(stats.BlocksWritten)
-	wtBlockManagerBytesTotal.WithLabelValues("read").Set(stats.BytesRead)
-	wtBlockManagerBytesTotal.WithLabelValues("read_mapped").Set(stats.MappedBytesRead)
-	wtBlockManagerBytesTotal.WithLabelValues("written").Set(stats.BytesWritten)
+	wtBlockManagerBlocksTotal.WithLabelValues("read").Add(stats.BlocksRead)
+	wtBlockManagerBlocksTotal.WithLabelValues("read_mapped").Add(stats.MappedBlocksRead)
+	wtBlockManagerBlocksTotal.WithLabelValues("pre_loaded").Add(stats.BlocksPreLoaded)
+	wtBlockManagerBlocksTotal.WithLabelValues("written").Add(stats.BlocksWritten)
+	wtBlockManagerBytesTotal.WithLabelValues("read").Add(stats.BytesRead)
+	wtBlockManagerBytesTotal.WithLabelValues("read_mapped").Add(stats.MappedBytesRead)
+	wtBlockManagerBytesTotal.WithLabelValues("written").Add(stats.BytesWritten)
 }
 
 func (stats *WTBlockManagerStats) Describe(ch chan<- *prometheus.Desc) {

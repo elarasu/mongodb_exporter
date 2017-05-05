@@ -660,7 +660,7 @@ func (stats *RocksDbStats) Export(ch chan<- prometheus.Metric) {
 	rocksDbWritesPerSec.Set(stats.GetStatsLineField("** DB Stats **", "Cumulative writes: ", 5))
 	rocksDbWALBytesPerSecs.Set(stats.GetStatsLineField("** DB Stats **", "Cumulative WAL: ", 4))
 	rocksDbWALWritesPerSync.Set(stats.GetStatsLineField("** DB Stats **", "Cumulative WAL: ", 2))
-	rocksDbStalledSecs.Set(stats.GetStatsLineField("** DB Stats **", "Cumulative stall: ", 0))
+	rocksDbStalledSecs.Add(stats.GetStatsLineField("** DB Stats **", "Cumulative stall: ", 0))
 	rocksDbStallPercent.Set(stats.GetStatsLineField("** DB Stats **", "Cumulative stall: ", 1))
 
 	// stats from db.serverStatus().rocksdb (parsed):
