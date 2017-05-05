@@ -524,10 +524,10 @@ func (stats *RocksDbStats) ProcessLevelStats() {
 			levelName = "total"
 		}
 		if levelName != "L0" {
-			rocksDbCompactionBytes.With(prometheus.Labels{"level": levelName, "type": "read"}).Set(level.ReadGB * gigabyte)
-			rocksDbCompactionBytes.With(prometheus.Labels{"level": levelName, "type": "read_n"}).Set(level.RnGB * gigabyte)
-			rocksDbCompactionBytes.With(prometheus.Labels{"level": levelName, "type": "read_np1"}).Set(level.Rnp1GB * gigabyte)
-			rocksDbCompactionBytes.With(prometheus.Labels{"level": levelName, "type": "moved"}).Set(level.MovedGB * gigabyte)
+			rocksDbCompactionBytes.With(prometheus.Labels{"level": levelName, "type": "read"}).Add(level.ReadGB * gigabyte)
+			rocksDbCompactionBytes.With(prometheus.Labels{"level": levelName, "type": "read_n"}).Add(level.RnGB * gigabyte)
+			rocksDbCompactionBytes.With(prometheus.Labels{"level": levelName, "type": "read_np1"}).Add(level.Rnp1GB * gigabyte)
+			rocksDbCompactionBytes.With(prometheus.Labels{"level": levelName, "type": "moved"}).Add(level.MovedGB * gigabyte)
 			rocksDbCompactionBytesPerSec.With(prometheus.Labels{"level": levelName, "type": "read"}).Set(level.RdMBPSec * megabyte)
 			rocksDbCompactionWriteAmplification.WithLabelValues(levelName).Set(level.WAmp)
 		}
